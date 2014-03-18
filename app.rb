@@ -1,24 +1,25 @@
 require 'sinatra'
+require "sinatra/reloader"
 
 get '/' do
-		File.new('public/html/login.html').readlines
+	erb :login
 end
 
 post '/' do
-		username = params[:username]
-		password = params[:password]
+	username = params[:username]
+	password = params[:password]
 
-		if username == "inoue" && password == "xyz123"
-				"good"
-		else
-				"no good" + "your name is #{username}\nyour password is #{password}" 
-		end
+	if username == "inoue" && password == "xyz123"
+		redirect "http://localhost:4567/home"	
+	else
+		redirect "http://localhost:4567"	
+	end
 end
 
-get '/tabs' do
-		File.new('public/html/tabs.html').readlines
+get '/home' do
+	erb :home
 end
 
 get '/runtest' do
-		File.new('public/html/runtest.html').readlines
+	File.new('public/html/runtest.html').readlines
 end
